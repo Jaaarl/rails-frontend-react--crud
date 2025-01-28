@@ -1,5 +1,6 @@
-import PostsList from "./features/posts/PostsList";
 import { BrowserRouter as Router } from "react-router-dom";
+import AppRoutes from "./components/AppRoutes";
+import NavBar from "./components/NavBar";
 
 function App() {
   return (
@@ -8,7 +9,8 @@ function App() {
         <div className="text-blue-500 text-3xl">
           React + <span className="text-red-700">Rails</span> Blog
         </div>
-        <PostsList />
+        <NavBar />
+        <AppRoutes />
       </div>
     </Router>
   );
