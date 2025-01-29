@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { API_URL } from "../../constants";
-
+import { Link } from "react-router-dom";
 function PostsList() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,10 +29,12 @@ function PostsList() {
   return (
     <div className="flex flex-col gap-2">
       {posts.map((post) => (
-        <div key={post.id} className="border">
-          <h2 className="text-2xl">{post.title}</h2>
-          <p>{post.body}</p>
-        </div>
+        <Link to={`posts/${post.id}`}>
+          <div key={post.id} className="border">
+            <h2 className="text-2xl">{post.title}</h2>
+            <p>{post.body}</p>
+          </div>
+        </Link>
       ))}
     </div>
   );
