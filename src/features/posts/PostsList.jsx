@@ -29,12 +29,13 @@ function PostsList() {
   return (
     <div className="flex flex-col gap-2">
       {posts.map((post) => (
-        <Link to={`posts/${post.id}`}>
-          <div key={post.id} className="border">
+        <div key={post.id} className="border">
+          <Link to={`posts/${post.id}`}>
             <h2 className="text-2xl">{post.title}</h2>
-            <p>{post.body}</p>
-          </div>
-        </Link>
+          </Link>
+          <p>{post.body}</p>
+          <Link to={`posts/${post.id}/edit`}>Edit</Link>
+        </div>
       ))}
     </div>
   );
