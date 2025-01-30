@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { API_URL } from "../../constants";
+import { updatePost, showPost } from "../../services/postService";
 
 export default function EditPostForm() {
   const [post, setPost] = useState(null);
@@ -12,13 +12,8 @@ export default function EditPostForm() {
   useEffect(() => {
     const fetchCurrentPost = async () => {
       try {
-        const response = await fetch(`${API_URL}/${id}`);
-        if (response.ok) {
-          const json = await response.json();
-          setPost(json);
-        } else {
-          throw response;
-        }
+        const json = await showPost(id);
+        setPost(json);
       } catch (e) {
         console.log(e);
       } finally {
@@ -31,18 +26,8 @@ export default function EditPostForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(post),
-      });
-      if (response.ok) {
-        navigate(`/posts/${id}`);
-      } else {
-        throw response;
-      }
+      const json = await updatePost(post, id);
+      navigate(`/posts/${id}`);
     } catch (e) {
       console.log("an error occured", e);
     }
