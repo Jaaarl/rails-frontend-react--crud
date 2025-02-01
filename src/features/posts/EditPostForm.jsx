@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePost, showPost } from "../../services/postService";
+import PostForm from "./PostForm";
 
 export default function EditPostForm() {
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -23,10 +23,9 @@ export default function EditPostForm() {
     fetchCurrentPost();
   }, [id]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (formData) => {
     try {
-      const json = await updatePost(post, id);
+      const json = await updatePost(formData, id);
       navigate(`/posts/${id}`);
     } catch (e) {
       console.log("an error occured", e);
@@ -37,35 +36,12 @@ export default function EditPostForm() {
 
   return (
     <>
-      <h2 className="mt-2 text-3xl">Edit Post</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="title">Title:</label>
-          <input
-            type="text"
-            className="border mx-2 mt-2"
-            value={post.title}
-            onChange={(e) => setPost({ ...post, title: e.target.value })}
-          />
-        </div>
-        <div>
-          <label htmlFor="body">Body:</label>
-          <input
-            type="textarea"
-            className="border mx-2 my-2"
-            value={post.body}
-            onChange={(e) => setPost({ ...post, body: e.target.value })}
-          />
-        </div>
-        <div>
-          <button
-            type="submit"
-            className="mt-2 px-4 py-2 bg-green-900 text-white rounded hover:bg-green-950"
-          >
-            Edit
-          </button>
-        </div>
-      </form>
+      <PostForm
+        post={post}
+        headerText="Edit a new post"
+        onSubmit={handleSubmit}
+        buttonText="Edit post"
+      />
     </>
   );
 }
