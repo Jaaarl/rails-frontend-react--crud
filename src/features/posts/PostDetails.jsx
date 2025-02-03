@@ -36,6 +36,13 @@ export default function PostDetails() {
   return (
     <div className="my-2">
       <h1 className="mb-2 text-3xl">{post.title}</h1>
+      {post.image_url ? (
+        <img src={post.image_url} class="p-2 rounded-lg shadow-sm mb-2" />
+      ) : (
+        <div class="p-2 w-[200px] h-[200px] rounded-lg shadow-sm mb-2 bg-gray-200 flex items-center justify-center text-gray-500">
+          No Image Available
+        </div>
+      )}
       <p className="mb-2">{post.body}</p>
       <div className="flex flex-row gap-1">
         <Link

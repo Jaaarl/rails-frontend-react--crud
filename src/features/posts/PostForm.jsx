@@ -5,6 +5,7 @@ export default function PostForm({ post, headerText, onSubmit, buttonText }) {
     post || {
       title: "",
       body: "",
+      image: "",
     }
   );
   return (
@@ -26,6 +27,19 @@ export default function PostForm({ post, headerText, onSubmit, buttonText }) {
             onChange={(e) =>
               setFormData({ ...formData, title: e.target.value })
             }
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Image:</label>
+          <input
+            id="image"
+            type="file"
+            accept="image/*"
+            className="file:border-0 file:bg-gray-500 file:px-1 file:text-white border mx-2 my-2"
+            onChange={(e) => {
+              setFormData({ ...formData, image: e.target.files[0] });
+              console.log(e.target.files[0]);
+            }}
           />
         </div>
         <div>

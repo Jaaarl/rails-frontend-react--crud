@@ -38,9 +38,9 @@ export default function EditPostForm() {
     <>
       <PostForm
         post={post}
-        headerText="Edit a new post"
+        headerText="Edit a post"
         onSubmit={handleSubmit}
-        buttonText="Edit post"
+        buttonText="Update post"
       />
     </>
   );
